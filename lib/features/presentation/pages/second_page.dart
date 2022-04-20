@@ -57,7 +57,7 @@ class _SecondPageState extends State<SecondPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget> [
                   Text(
-                    state.weatherModel.city!.name.toString() ,
+                    state.weatherModel.city?.name.toString() ?? '' ,
                     style:  const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 50,
@@ -65,7 +65,7 @@ class _SecondPageState extends State<SecondPage> {
                     ),
                   ),
                   Text(
-                    state.weatherModel.city!.sunrise.toString() ,
+                    state.weatherModel.list?[0].dtTxt.toString() ?? ''  ,
                     style:  const TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -85,9 +85,9 @@ class _SecondPageState extends State<SecondPage> {
                         width: 80,
                         ),
                     const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style: TextStyle(
+                    Text(
+                     state.weatherModel.list?[0].main?.temp.toString() ?? '',
+                     style: const TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 45,
                       color: Colors.black87,
@@ -106,17 +106,16 @@ class _SecondPageState extends State<SecondPage> {
                         width: 80,
                         ),
                     const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style:  TextStyle(
-                      // fontWeight: FontWeight.bold,
+                     Text(
+                     state.weatherModel.list?[0].main?.humidity.toString() ?? '',
+                     style: const TextStyle(
                       fontSize: 45,
                       color: Colors.black87,
                     ),
                      ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,9 +126,9 @@ class _SecondPageState extends State<SecondPage> {
                         width: 80,
                         ),
                     const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style:  TextStyle(
+                     Text(
+                     state.weatherModel.list?[0].wind?.speed.toString() ?? '',  
+                     style: const TextStyle(
                       // fontWeight: FontWeight.bold,
                       fontSize: 45,
                       color: Colors.black87,
