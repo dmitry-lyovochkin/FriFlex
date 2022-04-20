@@ -17,15 +17,15 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState>{
       await weatherRepository.fetchWeather(event.cityName).then((weather) {
         emit(WeatherLoadedState(weatherModel: weather));
       }).catchError((error) {
-        emit(WeatherErrorState(message: error));
+        emit(WeatherErrorState(message: error.toString()));
       }); 
       } else if (event is WeatherDetailEvent) {
         emit(WeatherLoadingState());
 
-        await weatherRepository.fetchDetailedWeather(event.cityName).then((weather) {
+        await weatherRepository.fetchThreeDaysWeather(event.cityName).then((weather) {
           emit(WeatherLoadedState(weatherModel: weather));
         }).catchError((error) {
-          emit(WeatherErrorState(message: 'В сети? ${error}'));
+          emit(WeatherErrorState(message: 'В сети? $error'));
         });
       }
     });

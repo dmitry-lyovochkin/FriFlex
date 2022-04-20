@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:weather_application_2/features/data/models/weather_model.dart';
+import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/pages/second_page.dart';
 import 'package:weather_application_2/features/presentation/theme/colors/colors.dart';
 
@@ -14,13 +16,14 @@ class _HomePageState extends State<HomePage> {
   final cityController = TextEditingController();
 
   // String get _text => _cityName.text;
+  final weatherBloc = GetIt.instance<WeatherBloc>();
 
   @override
   void dispose() {
     cityController.dispose();
     super.dispose();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,32 +38,34 @@ class _HomePageState extends State<HomePage> {
                 controller: cityController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      width: 1.5,
-                      color: AppColor.primaryColor,
-                    )
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: AppColor.primaryColor,
+                      )),
                   labelText: 'Город',
                   filled: true,
                   hintText: "Введите город",
                   helperText: '',
-                  prefixIcon: const Icon(Icons.location_city, color: AppColor.primaryColor),
+                  prefixIcon: const Icon(Icons.location_city,
+                      color: AppColor.primaryColor),
                   contentPadding: const EdgeInsets.fromLTRB(20, 25, 20, 15),
                 ),
               ),
             ),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pushNamed(context, '/second', arguments: cityController.text), /* прокидываю параметры на 2 экран */
+            onPressed: () {
+              Navigator.pushNamed(context, '/second',
+                  arguments: cityController.text);
+            },
+            /* прокидываю параметры на 2 экран */
             child: const Text(
               'Узнать погоду',
-              style: TextStyle(
-                fontSize: 15
-              ),
+              style: TextStyle(fontSize: 15),
             ),
             style: ElevatedButton.styleFrom(
-               primary: AppColor.primaryColor,
+              primary: AppColor.primaryColor,
             ),
           )
         ],

@@ -7,6 +7,7 @@ import 'package:weather_application_2/features/domain/repositories/weather_repos
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
+import 'package:weather_application_2/features/presentation/pages/third_page.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({
@@ -40,7 +41,16 @@ class _SecondPageState extends State<SecondPage> {
         actions: <Widget>[
           IconButton(
           icon: const Icon(Icons.arrow_forward),
-          onPressed: () => Navigator.pushNamed(context, '/third'),
+          onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: BlocProvider.of<WeatherBloc>(context),
+                      // child: ThirdPage(masterWeather: weather,),
+                    ),
+                  ),
+                );
+              },
           ),
         ],
       ),
@@ -138,11 +148,16 @@ class _SecondPageState extends State<SecondPage> {
                   ),
                 ],
               );
-            } else if (state is WeatherErrorState) {
-              return const Center(
-                child: Text('error')
-              );
-            } return const CircularProgressIndicator();
+            } else  {
+              // return Text('gregre');
+
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //    SnackBar(
+              //     content: const Text('Ошибка получения данных'), 
+              //     action: SnackBarAction(label: 'hey!', onPressed: () {})
+              //     ));
+              // // );
+            }  return const CircularProgressIndicator();
           }
         ),
       )
