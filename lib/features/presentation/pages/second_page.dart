@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/data/repository/weather_repository.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
 
@@ -27,8 +26,8 @@ class _SecondPageState extends State<SecondPage> {
         ),
         actions: <Widget>[ //показываю иконку справа AppBar
           IconButton(
-          icon: const Icon(Icons.arrow_forward),
-          onPressed: () => Navigator.pushNamed(context, '/third'),
+            icon: const Icon(Icons.arrow_forward),
+            onPressed: () => Navigator.pushNamed(context, '/third'),
           ),
         ],
       ),

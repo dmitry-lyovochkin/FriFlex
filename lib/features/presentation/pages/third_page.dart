@@ -23,7 +23,7 @@ class _ThirdPageState extends State<ThirdPage> {
         ),
       ),
       body: BlocBuilder<WeatherBloc, WeatherState>(
-        // bloc: GetIt.instance<WeatherBloc>(),
+        // bloc: context<WeatherBloc>(),
         builder: (context, state) {
           if (state is WeatherLoadingState) {
             return const Center(child: CircularProgressIndicator());

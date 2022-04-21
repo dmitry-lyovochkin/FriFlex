@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/theme/colors/colors.dart';
@@ -22,9 +22,7 @@ class _HomePageState extends State<HomePage> {
  
   @override
   Widget build(BuildContext context) {
-    return /* BlocProvider<WeatherBloc>(
-      create: (context) => GetIt.instance<WeatherBloc>(), */
-      /* child: */ Scaffold(
+    return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {/* прокидываю параметры на 2 экран */
-                GetIt.instance<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text));
+                context.read<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text)); // обращаюсь к блоку и добавляю ему ивент с текстом контроллера
                 Navigator.pushNamed(context, '/second');
               },
               child: const Text(

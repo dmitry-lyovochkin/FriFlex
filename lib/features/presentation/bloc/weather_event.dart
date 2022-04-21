@@ -16,11 +16,3 @@ class WeatherLoadEvent extends WeatherEvent {
   List<Object> get props => [cityName]; 
 }
 
-class WeatherDetailEvent extends WeatherEvent {
-  final String cityName;
-
-  const WeatherDetailEvent({required this.cityName});
-
- @override
-  List<Object> get props => [cityName]; 
-}
