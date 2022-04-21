@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_application_2/features/data/models/weather_model.dart';
-import 'package:weather_application_2/features/presentation/pages/second_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
+import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/theme/colors/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,8 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final cityController = TextEditingController();
 
-  // String get _text => _cityName.text;
-
   @override
   void dispose() {
     cityController.dispose();
@@ -23,7 +23,9 @@ class _HomePageState extends State<HomePage> {
  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider<WeatherBloc>(
+      create: (context) => GetIt.instance<WeatherBloc>(),
+    child: Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +54,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pushNamed(context, '/second', arguments: cityController.text), /* прокидываю параметры на 2 экран */
+            onPressed: () {/* прокидываю параметры на 2 экран */
+              GetIt.instance<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text));
+              Navigator.pushNamed(context, '/second', arguments: cityController.text);
+            },
             child: const Text(
               'Узнать погоду',
               style: TextStyle(
@@ -61,14 +66,11 @@ class _HomePageState extends State<HomePage> {
             ),
             style: ElevatedButton.styleFrom(
                primary: AppColor.primaryColor,
-            ),
+            )
+            
           )
         ],
       ),
-    );
+    ));
   }
-
-  // void _search() async {
-  //   _dataService.getWeatherCity(_cityController.text);
-  // }
 }

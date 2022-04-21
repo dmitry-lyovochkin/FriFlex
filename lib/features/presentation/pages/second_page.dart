@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/data/models/weather_model.dart';
-import 'package:weather_application_2/features/data/models/weather_model.dart';
+import 'package:get_it/get_it.dart';
 import 'package:weather_application_2/features/data/repository/weather_repository.dart';
-import 'package:weather_application_2/features/domain/repositories/weather_repository.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
 
 class SecondPage extends StatefulWidget {
@@ -23,11 +20,6 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     Object? cityName = ModalRoute.of(context)?.settings.arguments;
-    // var forecastList = snapshot.data.list;
-    // var icon = forecastList[0].getIconUrl();
-    // var temp = forecastList[0].temp.day.toStringAsFixed(0);
-    // var city = snapshot.data?.city.name;
-    /* достал ситинейм с 1 пейдж */
 
     return Scaffold(
       appBar: AppBar(
@@ -44,20 +36,18 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ],
       ),
-      body: BlocProvider(
-        // добавляю евент со значением
-        create: (context) => WeatherBloc(weatherRepo)..add(WeatherLoadEvent(cityName: cityName.toString())), /*  */
-        child: BlocBuilder<WeatherBloc, WeatherState>(
+      body: BlocBuilder<WeatherBloc, WeatherState>(
+          bloc: GetIt.instance<WeatherBloc>(),
           builder: (context, state) {
             if (state is WeatherLoadingState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is WeatherLoadedState) {
-              return Column( /* температура, влажность, скорость ветра */
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              return Column( 
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget> [
                   Text(
-                    state.weatherModel.city!.name.toString() ,
+                    state.weatherModel.city?.name.toString() ?? '',
                     style:  const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 50,
@@ -65,16 +55,13 @@ class _SecondPageState extends State<SecondPage> {
                     ),
                   ),
                   Text(
-                    state.weatherModel.city!.sunrise.toString() ,
+                    state.weatherModel.list?[0].dtTxt.toString() ?? '',
                     style:  const TextStyle(
-                      // fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 50),
-
-                  // const SizedBox(width: 20),const SizedBox(width: 20)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,13 +72,12 @@ class _SecondPageState extends State<SecondPage> {
                         width: 80,
                         ),
                     const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style: TextStyle(
-                      // fontWeight: FontWeight.bold,
-                      fontSize: 45,
-                      color: Colors.black87,
-                    ),
+                    Text(
+                      state.weatherModel.list?[0].main?.temp.toString() ?? '', //конкатинация не срабатывает, требует бэнг оператор. Но тогда без обработки могут быть ошибки с null
+                      style: const TextStyle(
+                        fontSize: 45,
+                        color: Colors.black87,
+                      ),
                      ),
                     ],
                   ),
@@ -105,18 +91,17 @@ class _SecondPageState extends State<SecondPage> {
                         height: 80,
                         width: 80,
                         ),
-                    const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style:  TextStyle(
-                      // fontWeight: FontWeight.bold,
+                    const SizedBox(width: 40),
+                    Text(
+                     state.weatherModel.list?[0].main?.humidity.toString() ?? '',
+                     style: const TextStyle(
                       fontSize: 45,
                       color: Colors.black87,
                     ),
                      ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,10 +112,9 @@ class _SecondPageState extends State<SecondPage> {
                         width: 80,
                         ),
                     const SizedBox(width: 20),
-                    const Text(
-                     '25',
-                     style:  TextStyle(
-                      // fontWeight: FontWeight.bold,
+                    Text(
+                     state.weatherModel.list?[0].wind?.speed.toString() ?? '',
+                     style: const TextStyle(
                       fontSize: 45,
                       color: Colors.black87,
                     ),
@@ -146,8 +130,8 @@ class _SecondPageState extends State<SecondPage> {
             } return const CircularProgressIndicator();
           }
         ),
-      )
-    );
+      );
+    
     
   }
 }
