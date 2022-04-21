@@ -1,16 +1,24 @@
 # weather_application_2
 
-A new Flutter project.
+Приложение погоды. Приложение выполнено по тестовому заданию
 
-## Getting Started
+## В проекте использованы:
+- работа с API погоды
+- работа с Flutter Bloc
 
-This project is a starting point for a Flutter application.
+## Скрины работы приложения:
 
-A few resources to get you started if this is your first Flutter project:
+### Первый экран с вводом города:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![Скриншот 21 04 22_23 01 53](https://user-images.githubusercontent.com/80591456/164553422-cfe56cef-c420-42ac-96b4-7c5a38bf7cad.png)
+![Скриншот 22 04 22_00 09 16](https://user-images.githubusercontent.com/80591456/164553439-a53ec116-fc44-4640-9a7e-6e317558b6ec.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Отображение ошибки, если приложение без доступа к интернету, не введен город, город введен неправильно и прочие ошибки с API:
+
+![Скриншот 22 04 22_00 10 43](https://user-images.githubusercontent.com/80591456/164553463-b041abad-3d60-4ee6-98bc-855f2b643fd6.png)
+
+### Второй экран с отображением температуры, влажности, скорости ветра в введенном городе:
+![Скриншот 22 04 22_00 09 43](https://user-images.githubusercontent.com/80591456/164553477-dc16d2c8-fce6-4167-892b-98e958d5ff5b.png)
+
+### Третий экран с отображением температуры, влажности и скорости ветра в введенном городе на три дня:
+![Скриншот 22 04 22_00 10 16](https://user-images.githubusercontent.com/80591456/164553481-5a957d3b-dd8a-4f9e-bab5-098c3e6609f3.png)
