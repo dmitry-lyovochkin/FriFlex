@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 GetIt injection = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  injection.registerLazySingleton(() => http.Client());
+
   injection.registerSingleton<WeatherRepository>(WeatherRepo()); /* создается только один раз */
 
-  injection.registerFactory(() => WeatherBloc(injection()));
+  injection.registerLazySingleton(() => WeatherBloc(injection()));
 
-  injection.registerLazySingleton(() => http.Client());
 }

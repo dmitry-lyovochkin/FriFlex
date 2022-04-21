@@ -8,6 +8,7 @@ import 'package:weather_application_2/features/presentation/pages/home_page.dart
 import 'package:weather_application_2/features/presentation/pages/second_page.dart';
 import 'package:weather_application_2/features/presentation/pages/third_page.dart';
 import 'package:weather_application_2/locator_service.dart' as depinjections;
+import 'package:weather_application_2/locator_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return /* MultiBlocProvider(
+      providers: [
+        BlocProvider<WeatherBloc>(
+          create: (context) => injection<WeatherBloc>()..add(const WeatherLoadEvent(cityName: '')),
+        )], */
+  /*   child: */ MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
@@ -36,7 +42,8 @@ class MyApp extends StatelessWidget {
         '/second': (context) => const SecondPage(),
         '/third': (context) => const ThirdPage(),
         },
-      );
+    );
+    
     
   }
 }
