@@ -1,8 +1,5 @@
 import 'package:bloc/bloc.dart';
-
-import 'package:weather_application_2/features/data/models/weather_model.dart';
 import 'package:weather_application_2/features/data/repository/weather_repository.dart';
-import 'package:weather_application_2/features/domain/repositories/weather_repository.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
 

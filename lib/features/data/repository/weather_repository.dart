@@ -7,9 +7,7 @@ abstract class WeatherRepository {
   Future<WeatherModel> fetchThreeDaysWeather(String cityName);
 }
 
-
 class WeatherRepo implements WeatherRepository {
-
   @override
   Future<WeatherModel> fetchThreeDaysWeather(String cityName) async {
      final parameters = {
@@ -45,8 +43,6 @@ class WeatherRepo implements WeatherRepository {
       throw Exception('Error');
     }
   }
-  
 }
-  
 
 class NetworkError extends Error{}
