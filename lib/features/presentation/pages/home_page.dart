@@ -25,52 +25,64 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider<WeatherBloc>(
       create: (context) => GetIt.instance<WeatherBloc>(),
-    child: Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: SizedBox(
-              width: 350,
-              child: TextField(
-                controller: cityController,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      width: 1.5,
-                      color: AppColor.primaryColor,
-                    )
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: TextField(
+                  controller: cityController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: AppColor.primaryColor,
+                      )
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        width: 1.5,
+                        color: AppColor.primaryColor,
+                      )
+                    ),
+                    labelText: 'Название города',
+                    filled: true,
+                    prefixIcon: const Icon(
+                      Icons.location_city, 
+                      color: AppColor.primaryColor
+                    ),
+                    contentPadding: const EdgeInsets.fromLTRB(20, 25, 20, 15),
                   ),
-                  labelText: 'Город',
-                  filled: true,
-                  hintText: "Введите город",
-                  helperText: '',
-                  prefixIcon: const Icon(Icons.location_city, color: AppColor.primaryColor),
-                  contentPadding: const EdgeInsets.fromLTRB(20, 25, 20, 15),
                 ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {/* прокидываю параметры на 2 экран */
-              GetIt.instance<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text));
-              Navigator.pushNamed(context, '/second', arguments: cityController.text);
-            },
-            child: const Text(
-              'Узнать погоду',
-              style: TextStyle(
-                fontSize: 15
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {/* прокидываю параметры на 2 экран */
+                GetIt.instance<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text));
+                Navigator.pushNamed(context, '/second', arguments: cityController.text);
+              },
+              child: const Text(
+                'Подтвердить',
+                style: TextStyle(
+                  fontSize: 15
+                ),
               ),
-            ),
-            style: ElevatedButton.styleFrom(
-               primary: AppColor.primaryColor,
+              style: ElevatedButton.styleFrom(
+                primary: AppColor.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)
+                )
+              )
             )
-            
-          )
-        ],
-      ),
-    ));
+          ],
+        ),
+      )
+    );
   }
 }

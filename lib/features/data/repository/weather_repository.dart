@@ -13,6 +13,7 @@ class WeatherRepo implements WeatherRepository {
      final parameters = {
       'appid': '254c9c65adc2f48f757587f78aae369f',
       'q': cityName,
+      'cnt': '24',
       'units': 'metric',
     };
 
@@ -30,13 +31,14 @@ class WeatherRepo implements WeatherRepository {
   Future<WeatherModel> fetchWeather(String cityName) async {
      final parameters = {
       'appid': '254c9c65adc2f48f757587f78aae369f',
-      'q': cityName,
-      'units': 'metric',
+      'q': cityName, // название города
+      'cnt': '24', // 24 - ограничение на получение данных. Из доки API
+      'units': 'metric', // перевожу в нужный формат
     };
 
-    final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters);
+    final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters); // формирование запроса
     final response = await http.get(uri);
-
+    
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(json.decode(response.body));
     } else {

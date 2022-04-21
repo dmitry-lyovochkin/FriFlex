@@ -131,7 +131,12 @@ class _SecondPageState extends State<SecondPage> {
           }
         ),
       );
-    
-    
   }
 }
+
+  // if (state is WeatherErrorState) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(state.error!),
+  //     ),
+  //   );
