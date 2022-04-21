@@ -23,9 +23,9 @@ class _HomePageState extends State<HomePage> {
  
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WeatherBloc>(
-      create: (context) => GetIt.instance<WeatherBloc>(),
-      child: Scaffold(
+    return /* BlocProvider<WeatherBloc>(
+      create: (context) => GetIt.instance<WeatherBloc>(), */
+      /* child: */ Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () {/* прокидываю параметры на 2 экран */
                 GetIt.instance<WeatherBloc>().add(WeatherLoadEvent(cityName: cityController.text));
-                Navigator.pushNamed(context, '/second', arguments: cityController.text);
+                Navigator.pushNamed(context, '/second');
               },
               child: const Text(
                 'Подтвердить',
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-      )
-    );
+      );
+    /* ); */
   }
 }

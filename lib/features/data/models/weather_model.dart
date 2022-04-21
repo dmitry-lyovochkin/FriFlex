@@ -58,17 +58,18 @@ class ListModel {
   String? dtTxt;
   Rain? rain;
 
-  ListModel(
-      {this.dt,
-      this.main,
-      this.weather,
-      this.clouds,
-      this.wind,
-      this.visibility,
-      this.pop,
-      this.sys,
-      this.dtTxt,
-      this.rain});
+  ListModel({
+    this.dt,
+    this.main,
+    this.weather,
+    this.clouds,
+    this.wind,
+    this.visibility,
+    this.pop,
+    this.sys,
+    this.dtTxt,
+    this.rain
+  });
 
   ListModel.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
@@ -131,16 +132,17 @@ class Main {
   int? humidity;
   double? tempKf;
 
-  Main(
-      {this.temp,
-      this.feelsLike,
-      this.tempMin,
-      this.tempMax,
-      this.pressure,
-      this.seaLevel,
-      this.grndLevel,
-      this.humidity,
-      this.tempKf});
+  Main({
+    this.temp,
+    this.feelsLike,
+    this.tempMin,
+    this.tempMax,
+    this.pressure,
+    this.seaLevel,
+    this.grndLevel,
+    this.humidity,
+    this.tempKf
+  });
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = json['temp'].toDouble();

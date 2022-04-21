@@ -21,7 +21,7 @@ class _ThirdPageState extends State<ThirdPage> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pushNamed(context, '/home'),
+          onPressed: () => Navigator.pushNamed(context, '/home'), //навигация через именованный роутинг
         ),
       ),
       body: BlocBuilder<WeatherBloc, WeatherState>(

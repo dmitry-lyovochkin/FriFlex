@@ -19,7 +19,7 @@ class _SecondPageState extends State<SecondPage> {
 
   @override
   Widget build(BuildContext context) {
-    Object? cityName = ModalRoute.of(context)?.settings.arguments;
+    // Object? cityName = ModalRoute.of(context)?.settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,10 +40,19 @@ class _SecondPageState extends State<SecondPage> {
         listener: ((context, state) {
            if (state is WeatherErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar( //снакбар по доке феликса через блокЛисенер. В билдер блока его нельзя выводить, да и он там кидает ошибку.
-                content: Text('Ошибка получения данных'),
+              SnackBar( //снакбар по доке феликса через блокЛисенер. В билдер блока его нельзя выводить, да и он там кидает ошибку.
+                content: const Text('Ошибка получения данных'),
+                backgroundColor: Colors.grey,
+                behavior: SnackBarBehavior.floating,
+                action: SnackBarAction( // дает позможность взаимодействия с пользователем
+                  label: 'Назад',
+                  disabledTextColor: Colors.white,
+                  textColor: Colors.orange,
+                  onPressed: () {
+                 Navigator.pushNamed(context, '/home');
+                },
               ),
-            );
+            ));
           }
         }),
       child: BlocBuilder<WeatherBloc, WeatherState>(
@@ -55,9 +64,9 @@ class _SecondPageState extends State<SecondPage> {
               return Column( 
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget> [
+                children: <Widget> [ // все чилдрены показываю колонкой
                   Text(
-                    state.weatherModel.city?.name.toString() ?? '',
+                    state.weatherModel.city?.name.toString() ?? '', // наллПоинтер ошибки - большая проблема с красным экраном и падением всего приложения, если ставить бэнг оператор. Потому кидаю проверку везде
                     style:  const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 50,
@@ -71,8 +80,8 @@ class _SecondPageState extends State<SecondPage> {
                   //     color: Colors.black87,
                   //   ),
                   // ),
-                  const SizedBox(height: 50),
-                  Row(
+                  const SizedBox(height: 50), // отступы
+                  Row( // вывожу строкой иконка-данные
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -117,7 +126,7 @@ class _SecondPageState extends State<SecondPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/light_speed.png",
+                        "assets/images/light_speed.png", //картинки показываю просто через asset
                         height: 80,
                         width: 80,
                         ),
@@ -143,10 +152,3 @@ class _SecondPageState extends State<SecondPage> {
       ));
   }
 }
-
-  // if (state is WeatherErrorState) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(state.error!),
-  //     ),
-  //   );

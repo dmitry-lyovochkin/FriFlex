@@ -12,9 +12,9 @@ import 'package:weather_application_2/locator_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await depinjections.initializeDependencies();
-  BlocOverrides.runZoned(
+  BlocOverrides.runZoned( 
     () => runApp(const MyApp()),
-    blocObserver: WeatherBlocObserver(),
+    blocObserver: BlocsObserver(), //блокОбсервер инициализируется в мейне. Использую для отлова ошибок и показа текущего стейта
   ); 
 }
 
@@ -26,28 +26,27 @@ class MyApp extends StatelessWidget {
     return /* BlocProvider(
       create: (context) => WeatherBloc(weatherRepository), */
       MultiBlocProvider(
-      providers: [
-        BlocProvider<WeatherBloc>(
-          create: (context) => injection<WeatherBloc>()),
-          ],
-    child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const HomePage(),
-        
-        initialRoute: '/',
-        routes: {
-        '/home': (context) => const HomePage(),
-        '/second': (context) => const SecondPage(),
-        '/third': (context) => const ThirdPage(),
-        },
-      )
+        providers: [
+          BlocProvider<WeatherBloc>(
+            create: (context) => injection<WeatherBloc>()
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.deepPurple,
+          ),
+          debugShowCheckedModeBanner: false, //снимаю Debug mode в правом верхнем углу экрана
+          home: const HomePage(),
+          
+          initialRoute: '/home', //именованные роуты для навигации между экранами
+          routes: {
+            '/home': (context) => const HomePage(),
+            '/second': (context) => const SecondPage(),
+            '/third': (context) => const ThirdPage(),
+          },
+        )
       );
-      
-    
   }
 }
 
