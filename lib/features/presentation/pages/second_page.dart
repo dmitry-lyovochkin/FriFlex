@@ -36,8 +36,18 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ],
       ),
-      body: BlocBuilder<WeatherBloc, WeatherState>(
-          bloc: GetIt.instance<WeatherBloc>(),
+      body: BlocListener<WeatherBloc, WeatherState>(
+        listener: ((context, state) {
+           if (state is WeatherErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar( //снакбар по доке феликса через блокЛисенер. В билдер блока его нельзя выводить, да и он там кидает ошибку.
+                content: Text('Ошибка получения данных'),
+              ),
+            );
+          }
+        }),
+      child: BlocBuilder<WeatherBloc, WeatherState>(
+          // bloc: GetIt.instance<WeatherBloc>(),
           builder: (context, state) {
             if (state is WeatherLoadingState) {
               return const Center(child: CircularProgressIndicator());
@@ -54,13 +64,13 @@ class _SecondPageState extends State<SecondPage> {
                       color: Colors.black87,
                     ),
                   ),
-                  Text(
-                    state.weatherModel.list?[0].dtTxt.toString() ?? '',
-                    style:  const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  // Text(
+                  //   state.weatherModel.list?[0].dtTxt.toString() ?? '',
+                  //   style:  const TextStyle(
+                  //     fontSize: 20,
+                  //     color: Colors.black87,
+                  //   ),
+                  // ),
                   const SizedBox(height: 50),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -125,12 +135,12 @@ class _SecondPageState extends State<SecondPage> {
               );
             } else if (state is WeatherErrorState) {
               return const Center(
-                child: Text('error')
+                child: Text('Ошибка получения данных')
               );
             } return const CircularProgressIndicator();
           }
         ),
-      );
+      ));
   }
 }
 

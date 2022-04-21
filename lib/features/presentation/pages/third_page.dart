@@ -25,7 +25,7 @@ class _ThirdPageState extends State<ThirdPage> {
         ),
       ),
       body: BlocBuilder<WeatherBloc, WeatherState>(
-        bloc: GetIt.instance<WeatherBloc>(),
+        // bloc: GetIt.instance<WeatherBloc>(),
         builder: (context, state) {
           if (state is WeatherLoadingState) {
             return const Center(child: CircularProgressIndicator());
@@ -130,7 +130,9 @@ class _ThirdPageState extends State<ThirdPage> {
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: state.weatherModel.list!.length,
-                itemBuilder: (BuildContext context, int index) { 
+                itemBuilder: (BuildContext context, int index) {
+                  // final sortedItems = state.weatherModel.list![index].main!..sort((a, b) => a.compareTo(b));
+                  // final item = sortedItems; 
                    
                 return Container( 
                   width: MediaQuery.of(context).size.width / 1.7,
@@ -190,17 +192,17 @@ class _ThirdPageState extends State<ThirdPage> {
                             height: 30,
                             width: 30,
                             ),
-                            Text(
-                          state.weatherModel.list?[index].wind?.speed.toString() ?? '',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.black87,
-                          ),
+                          Text(
+                            state.weatherModel.list?[index].wind?.speed.toString() ?? '',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black87,
                             ),
+                          ),
                         ],
                       ),
                     ]
-                    )
+                  )
                 );
                 }
               ),

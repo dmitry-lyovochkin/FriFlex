@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc_observer.dart';
+import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/pages/home_page.dart';
 import 'package:weather_application_2/features/presentation/pages/second_page.dart';
 import 'package:weather_application_2/features/presentation/pages/third_page.dart';
 import 'package:weather_application_2/locator_service.dart' as depinjections;
+import 'package:weather_application_2/locator_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +23,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return /* BlocProvider(
+      create: (context) => WeatherBloc(weatherRepository), */
+      MultiBlocProvider(
+      providers: [
+        BlocProvider<WeatherBloc>(
+          create: (context) => injection<WeatherBloc>()),
+          ],
+    child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
@@ -34,7 +44,9 @@ class MyApp extends StatelessWidget {
         '/second': (context) => const SecondPage(),
         '/third': (context) => const ThirdPage(),
         },
+      )
       );
+      
     
   }
 }
