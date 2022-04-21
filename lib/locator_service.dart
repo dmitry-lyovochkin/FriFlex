@@ -11,5 +11,4 @@ Future<void> initializeDependencies() async {
   injection.registerSingleton<WeatherRepository>(WeatherRepo()); /* создается только один раз */
 
   injection.registerLazySingleton(() => WeatherBloc(injection()));
-
 }

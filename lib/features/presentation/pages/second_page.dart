@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:weather_application_2/features/data/repository/weather_repository.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
@@ -15,32 +14,29 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
-  WeatherRepo weatherRepo = WeatherRepo();
-
   @override
   Widget build(BuildContext context) {
-    // Object? cityName = ModalRoute.of(context)?.settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('SecondPage'),
         centerTitle: true,
-        leading: IconButton(
+        leading: IconButton( //показываю иконку слева AppBar
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pushNamed(context, '/home'),
         ),
-        actions: <Widget>[
+        actions: <Widget>[ //показываю иконку справа AppBar
           IconButton(
           icon: const Icon(Icons.arrow_forward),
           onPressed: () => Navigator.pushNamed(context, '/third'),
           ),
         ],
       ),
-      body: BlocListener<WeatherBloc, WeatherState>(
+      body: BlocListener<WeatherBloc, WeatherState>( // вешаю слушателя, который вызывается только на изменение state
         listener: ((context, state) {
            if (state is WeatherErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar( //снакбар по доке феликса через блокЛисенер. В билдер блока его нельзя выводить, да и он там кидает ошибку.
+              SnackBar( // снакбар по доке через блокЛисенер. В билдер блока его нельзя выводить, да и он там кидает ошибку.
                 content: const Text('Ошибка получения данных'),
                 backgroundColor: Colors.grey,
                 behavior: SnackBarBehavior.floating,
@@ -49,18 +45,18 @@ class _SecondPageState extends State<SecondPage> {
                   disabledTextColor: Colors.white,
                   textColor: Colors.orange,
                   onPressed: () {
-                 Navigator.pushNamed(context, '/home');
-                },
-              ),
-            ));
+                    Navigator.pushNamed(context, '/home');
+                  },
+                ),
+              )
+            );
           }
         }),
-      child: BlocBuilder<WeatherBloc, WeatherState>(
-          // bloc: GetIt.instance<WeatherBloc>(),
+        child: BlocBuilder<WeatherBloc, WeatherState>(
           builder: (context, state) {
-            if (state is WeatherLoadingState) {
+            if (state is WeatherLoadingState) { // вывожу стейт загружаемых данных (индикатор в центре)
               return const Center(child: CircularProgressIndicator());
-            } else if (state is WeatherLoadedState) {
+            } else if (state is WeatherLoadedState) { // вывожу главный стейт - данные получены
               return Column( 
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,19 +66,12 @@ class _SecondPageState extends State<SecondPage> {
                     style:  const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 50,
-                      color: Colors.black87,
+                      color: Colors.black,
                     ),
                   ),
-                  // Text(
-                  //   state.weatherModel.list?[0].dtTxt.toString() ?? '',
-                  //   style:  const TextStyle(
-                  //     fontSize: 20,
-                  //     color: Colors.black87,
-                  //   ),
-                  // ),
                   const SizedBox(height: 50), // отступы
                   Row( // вывожу строкой иконка-данные
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -90,19 +79,18 @@ class _SecondPageState extends State<SecondPage> {
                         height: 80,
                         width: 80,
                         ),
-                    const SizedBox(width: 20),
-                    Text(
-                      state.weatherModel.list?[0].main?.temp.toString() ?? '', //конкатинация не срабатывает, требует бэнг оператор. Но тогда без обработки могут быть ошибки с null
-                      style: const TextStyle(
-                        fontSize: 45,
-                        color: Colors.black87,
+                      Text(
+                        state.weatherModel.list?[0].main?.temp.toString() ?? '', //конкатинация не срабатывает, требует бэнг оператор. Но тогда без обработки могут быть ошибки с null
+                        style: const TextStyle(
+                          fontSize: 45,
+                          color: Colors.black,
+                        ),
                       ),
-                     ),
                     ],
                   ),
                   const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -110,45 +98,44 @@ class _SecondPageState extends State<SecondPage> {
                         height: 80,
                         width: 80,
                         ),
-                    const SizedBox(width: 40),
-                    Text(
-                     state.weatherModel.list?[0].main?.humidity.toString() ?? '',
-                     style: const TextStyle(
-                      fontSize: 45,
-                      color: Colors.black87,
-                    ),
-                     ),
+                      Text(
+                        state.weatherModel.list?[0].main?.humidity.toString() ?? '',
+                        style: const TextStyle(
+                          fontSize: 45,
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/light_speed.png", //картинки показываю просто через asset
+                        "assets/images/wind.png", //картинки показываю просто через asset
                         height: 80,
                         width: 80,
+                      ),
+                      Text(
+                        state.weatherModel.list?[0].wind?.speed.toString() ?? '',
+                        style: const TextStyle(
+                          fontSize: 45,
+                          color: Colors.black,
                         ),
-                    const SizedBox(width: 20),
-                    Text(
-                     state.weatherModel.list?[0].wind?.speed.toString() ?? '',
-                     style: const TextStyle(
-                      fontSize: 45,
-                      color: Colors.black87,
-                    ),
-                     ),
+                      ),
                     ],
                   ),
                 ],
               );
-            } else if (state is WeatherErrorState) {
-              return const Center(
-                child: Text('Ошибка получения данных')
+            } else if (state is WeatherErrorState) { // вывожу стейт ошибки (ошибка в центре экрана)
+                return const Center(
+                  child: Text('Ошибка получения данных')
               );
-            } return const CircularProgressIndicator();
+            } return const CircularProgressIndicator(); 
           }
         ),
-      ));
+      )
+    );
   }
 }

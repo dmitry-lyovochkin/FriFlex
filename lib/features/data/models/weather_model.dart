@@ -1,7 +1,5 @@
 // модель сгенерирована через https://javiercbk.github.io/json_to_dart/
-// подправил сразу ошибки + при компиляции ошибки(явно привел к .Double())
-
-import 'package:weather_application_2/utilities/constants.dart';
+// подправил сразу ошибки + явно привел к .Double()
 
 class WeatherModel {
   String? cod;
@@ -115,9 +113,6 @@ class ListModel {
       data['rain'] = rain!.toJson();
     }
     return data;
-  }
-  String getIconUrl() {
-    return Server.baseUriImagesUrl + weather![0].icon! + '.png';
   }
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
@@ -13,12 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final cityController = TextEditingController();
+  final cityController = TextEditingController(); // контроллер для вводимого города
 
   @override
   void dispose() {
     cityController.dispose();
-    super.dispose();
+    super.dispose(); // закрываю контроллер
   }
  
   @override
@@ -34,16 +33,16 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 width: 350,
                 child: TextField(
-                  controller: cityController,
+                  controller: cityController, // даю контроллер ТекстФилду
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    border: OutlineInputBorder( // задаю внешние параметры бордеру без фокуса
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(
                         width: 1.5,
                         color: AppColor.primaryColor,
                       )
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder( // задаю внешние параметры бордеру с фокусом
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(
                         width: 1.5,
@@ -52,11 +51,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     labelText: 'Название города',
                     filled: true,
-                    prefixIcon: const Icon(
+                    prefixIcon: const Icon( // показываю иконку вначале вводимого поля
                       Icons.location_city, 
                       color: AppColor.primaryColor
                     ),
-                    contentPadding: const EdgeInsets.fromLTRB(20, 25, 20, 15),
                   ),
                 ),
               ),
@@ -73,9 +71,9 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 15
                 ),
               ),
-              style: ElevatedButton.styleFrom(
+              style: ElevatedButton.styleFrom( // задаю стиль кнопки
                 primary: AppColor.primaryColor,
-                shape: RoundedRectangleBorder(
+                shape: RoundedRectangleBorder( // скругление бордера кнопки
                   borderRadius: BorderRadius.circular(10)
                 )
               )
@@ -83,6 +81,5 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       );
-    /* ); */
   }
 }
