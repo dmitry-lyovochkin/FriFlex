@@ -9,6 +9,9 @@
 .history
 .svn/
 
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
 # IntelliJ related
 *.iml
 *.ipr
