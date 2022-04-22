@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_bloc.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_event.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc/weather_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc/weather_state.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_event.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({
