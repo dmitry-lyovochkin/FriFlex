@@ -17,10 +17,6 @@ class _ThirdPageState extends State<ThirdPage> {
       appBar: AppBar(
         title: const Text('ThirdPage'),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pushNamed(context, '/home'), //навигация через именованный роутинг
-        ),
       ),
       body: BlocBuilder<WeatherDetailBloc, WeatherDetailState>(
         builder: (context, state) {

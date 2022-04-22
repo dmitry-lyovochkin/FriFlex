@@ -15,9 +15,9 @@ class WeatherDetailBloc extends Bloc<WeatherDetailEvent, WeatherDetailState>{
     
       await weatherRepository.fetchWeather(event.cityName).then((weather) { // жду ответа от апи, и затем выполняю then 
         
-        // main -> temp
          //меняю расположение объектов в листе
         _sortWeather(weather);
+
         emit(WeatherDetailLoadedState(weather)); // меняю состояние 
       }).catchError((error) {
         emit(WeatherDetailErrorState(error.toString()));

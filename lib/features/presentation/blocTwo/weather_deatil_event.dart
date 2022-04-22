@@ -7,7 +7,7 @@ abstract class WeatherDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class WeatherDetailLoadEvent extends WeatherDetailEvent { // описываю приходящие ивенты
+class WeatherDetailLoadEvent extends WeatherDetailEvent { // описываю приходящий ивент
   final String cityName;
 
   const WeatherDetailLoadEvent({required this.cityName});

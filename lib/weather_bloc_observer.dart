@@ -5,7 +5,7 @@ class BlocsObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
     print('${bloc.runtimeType} $change');
-    // смотрю изменения по стейтам. Проще понять что сейчас происходит и ошибки отлавливать */
+    // смотрю изменения по стейтам. Проще понять что сейчас происходит и ошибки отлавливать 
   }
 
   @override

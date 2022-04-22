@@ -272,8 +272,6 @@ class City {
   int? sunrise;
   int? sunset;
 
-  // City.empty();
-  
   City({
     this.id,
     this.name,
