@@ -7,23 +7,15 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState>{
   final WeatherRepository weatherRepository;
 
   WeatherBloc(this.weatherRepository) : super(WeatherLoadingState()) {
-    on<WeatherEvent>((event, emit) async {
-      if (event is WeatherLoadEvent) {
-      emit(WeatherLoadingState());
+    on<WeatherEvent>((event, emit) async { // асинхронная функция
+      if (event is WeatherLoadEvent) { // старт с ивента загрузки
+        emit(WeatherLoadingState()); // говорю об изменении стейта
     
-      await weatherRepository.fetchWeather(event.cityName).then((weather) {
-        emit(WeatherLoadedState(weatherModel: weather));
+      await weatherRepository.fetchWeather(event.cityName).then((weather) { // жду ответа от апи, и затем выполняю then 
+        emit(WeatherLoadedState(weather)); // меняю состояние //эмит делается в самом конце
       }).catchError((error) {
-        emit(WeatherErrorState(message: error.toString()));
+        emit(WeatherErrorState(error.toString()));
       }); 
-      } else if (event is WeatherDetailEvent) {
-        emit(WeatherLoadingState());
-
-        await weatherRepository.fetchThreeDaysWeather(event.cityName).then((weather) {
-          emit(WeatherLoadedState(weatherModel: weather));
-        }).catchError((error) {
-          emit(WeatherErrorState(message: 'В сети? $error'));
-        });
       }
     });
   }

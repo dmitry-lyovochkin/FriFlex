@@ -1,7 +1,5 @@
 // модель сгенерирована через https://javiercbk.github.io/json_to_dart/
-// подправил сразу ошибки + при компиляции ошибки(явно привел к .Double())
-
-import 'package:weather_application_2/utilities/constants.dart';
+// подправил сразу ошибки + явно привел к .Double()
 
 class WeatherModel {
   String? cod;
@@ -58,17 +56,18 @@ class ListModel {
   String? dtTxt;
   Rain? rain;
 
-  ListModel(
-      {this.dt,
-      this.main,
-      this.weather,
-      this.clouds,
-      this.wind,
-      this.visibility,
-      this.pop,
-      this.sys,
-      this.dtTxt,
-      this.rain});
+  ListModel({
+    this.dt,
+    this.main,
+    this.weather,
+    this.clouds,
+    this.wind,
+    this.visibility,
+    this.pop,
+    this.sys,
+    this.dtTxt,
+    this.rain
+  });
 
   ListModel.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
@@ -115,9 +114,6 @@ class ListModel {
     }
     return data;
   }
-  String getIconUrl() {
-    return Server.baseUriImagesUrl + weather![0].icon! + '.png';
-  }
 }
 
 class Main {
@@ -131,16 +127,17 @@ class Main {
   int? humidity;
   double? tempKf;
 
-  Main(
-      {this.temp,
-      this.feelsLike,
-      this.tempMin,
-      this.tempMax,
-      this.pressure,
-      this.seaLevel,
-      this.grndLevel,
-      this.humidity,
-      this.tempKf});
+  Main({
+    this.temp,
+    this.feelsLike,
+    this.tempMin,
+    this.tempMax,
+    this.pressure,
+    this.seaLevel,
+    this.grndLevel,
+    this.humidity,
+    this.tempKf
+  });
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = json['temp'].toDouble();
@@ -264,6 +261,7 @@ class Rain {
   }
 }
 
+
 class City {
   int? id;
   String? name;
@@ -274,15 +272,18 @@ class City {
   int? sunrise;
   int? sunset;
 
-  City(
-      {this.id,
-      this.name,
-      this.coord,
-      this.country,
-      this.population,
-      this.timezone,
-      this.sunrise,
-      this.sunset});
+  // City.empty();
+  
+  City({
+    this.id,
+    this.name,
+    this.coord,
+    this.country,
+    this.population,
+    this.timezone,
+    this.sunrise,
+    this.sunset
+  });
 
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -4,45 +4,32 @@ import 'package:http/http.dart' as http;
 
 abstract class WeatherRepository {
   Future<WeatherModel> fetchWeather(String cityName);
-  Future<WeatherModel> fetchThreeDaysWeather(String cityName);
 }
 
 class WeatherRepo implements WeatherRepository {
   @override
-  Future<WeatherModel> fetchThreeDaysWeather(String cityName) async {
-     final parameters = {
-      'appid': '254c9c65adc2f48f757587f78aae369f',
-      'q': cityName,
-      'units': 'metric',
-    };
-
-    final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters);
-    final response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return WeatherModel.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Error');
-    }
-  }
-
-  @override
   Future<WeatherModel> fetchWeather(String cityName) async {
      final parameters = {
       'appid': '254c9c65adc2f48f757587f78aae369f',
-      'q': cityName,
-      'units': 'metric',
+      'q': cityName, // название города
+      'cnt': '24', // 24 - ограничение на получение данных. Из доки API
+      'units': 'metric', // перевожу в нужный формат
     };
 
-    final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters);
+    final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters); // формирование запроса
     final response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return WeatherModel.fromJson(json.decode(response.body));
+    
+    if (response.statusCode == 200) { // положительный ответ от сервера
+      return WeatherModel.fromJson(json.decode(response.body)); // десериализую json
     } else {
-      throw Exception('Error');
+      throw Exception('Error'); // иначе прокидываю ошибку
     }
   }
 }
 
-class NetworkError extends Error{}
+
+
+
+
+
+
