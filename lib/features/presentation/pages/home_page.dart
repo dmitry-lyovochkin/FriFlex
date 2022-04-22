@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_event.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc/weather_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc/weather_event.dart';
 import 'package:weather_application_2/features/presentation/theme/colors/colors.dart';
 
 class HomePage extends StatefulWidget {

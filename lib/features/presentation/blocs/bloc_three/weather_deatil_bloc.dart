@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:weather_application_2/features/data/models/weather_model.dart';
 import 'package:weather_application_2/features/data/repository/weather_repository.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_event.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_state.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_event.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_state.dart';
 
 // на новый экран новый блок
 class WeatherDetailBloc extends Bloc<WeatherDetailEvent, WeatherDetailState>{

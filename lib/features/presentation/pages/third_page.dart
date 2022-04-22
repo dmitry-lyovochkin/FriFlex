@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_bloc.dart';
-import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_state.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocs/bloc_three/weather_deatil_state.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({Key? key}) : super(key: key);
