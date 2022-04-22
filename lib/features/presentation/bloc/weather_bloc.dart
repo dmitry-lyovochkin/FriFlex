@@ -12,9 +12,9 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState>{
         emit(WeatherLoadingState()); // говорю об изменении стейта
     
       await weatherRepository.fetchWeather(event.cityName).then((weather) { // жду ответа от апи, и затем выполняю then 
-        emit(WeatherLoadedState(weatherModel: weather)); // меняю состояние 
+        emit(WeatherLoadedState(weather)); // меняю состояние //эмит делается в самом конце
       }).catchError((error) {
-        emit(WeatherErrorState(message: error.toString()));
+        emit(WeatherErrorState(error.toString()));
       }); 
       }
     });

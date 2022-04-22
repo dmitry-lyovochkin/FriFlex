@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
-import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
+import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_state.dart';
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({Key? key}) : super(key: key);
@@ -22,12 +22,13 @@ class _ThirdPageState extends State<ThirdPage> {
           onPressed: () => Navigator.pushNamed(context, '/home'), //навигация через именованный роутинг
         ),
       ),
-      body: BlocBuilder<WeatherBloc, WeatherState>(
-        // bloc: context<WeatherBloc>(),
+      body: BlocBuilder<WeatherDetailBloc, WeatherDetailState>(
         builder: (context, state) {
-          if (state is WeatherLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is WeatherLoadedState) {
+          if (state is WeatherDetailLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator()
+            );
+          } else if (state is WeatherDetailLoadedState) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +124,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 )
               ]
             );
-          } else if (state is WeatherErrorState) {
+          } else if (state is WeatherDetailErrorState) {
             return const Center(
               child: Text('error')
             );

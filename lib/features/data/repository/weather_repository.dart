@@ -19,10 +19,17 @@ class WeatherRepo implements WeatherRepository {
     final uri = Uri.https('api.openweathermap.org', '/data/2.5/forecast/', parameters); // формирование запроса
     final response = await http.get(uri);
     
-    if (response.statusCode == 200) {
-      return WeatherModel.fromJson(json.decode(response.body));
+    if (response.statusCode == 200) { // положительный ответ от сервера
+      return WeatherModel.fromJson(json.decode(response.body)); // десериализую json
     } else {
-      throw Exception('Error');
+      throw Exception('Error'); // иначе прокидываю ошибку
     }
   }
 }
+
+
+
+
+
+
+

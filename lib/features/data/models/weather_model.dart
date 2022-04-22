@@ -261,6 +261,7 @@ class Rain {
   }
 }
 
+
 class City {
   int? id;
   String? name;
@@ -271,15 +272,18 @@ class City {
   int? sunrise;
   int? sunset;
 
-  City(
-      {this.id,
-      this.name,
-      this.coord,
-      this.country,
-      this.population,
-      this.timezone,
-      this.sunrise,
-      this.sunset});
+  // City.empty();
+  
+  City({
+    this.id,
+    this.name,
+    this.coord,
+    this.country,
+    this.population,
+    this.timezone,
+    this.sunrise,
+    this.sunset
+  });
 
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];

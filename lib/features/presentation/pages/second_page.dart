@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_state.dart';
+import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_bloc.dart';
+import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_event.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({
@@ -15,6 +17,7 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
+    final cityName = ModalRoute.of(context)?.settings.arguments.toString() ?? '';
 
     return Scaffold(
       appBar: AppBar(
@@ -27,8 +30,12 @@ class _SecondPageState extends State<SecondPage> {
         actions: <Widget>[ //показываю иконку справа AppBar
           IconButton(
             icon: const Icon(Icons.arrow_forward),
-            onPressed: () => Navigator.pushNamed(context, '/third'),
-          ),
+            onPressed: () {
+              context.read<WeatherDetailBloc>().add(WeatherDetailLoadEvent(cityName: cityName));
+              // context.select((WeatherBloc bloc) => bloc.state.weatherModel);
+              Navigator.pushNamed(context, '/third');
+            },
+          )
         ],
       ),
       body: BlocListener<WeatherBloc, WeatherState>( // вешаю слушателя, который вызывается только на изменение state

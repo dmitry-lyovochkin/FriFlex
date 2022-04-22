@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_application_2/features/data/repository/weather_repository.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc.dart';
 import 'package:weather_application_2/features/presentation/bloc/weather_bloc_observer.dart';
+import 'package:weather_application_2/features/presentation/blocTwo/weather_deatil_bloc.dart';
 import 'package:weather_application_2/features/presentation/pages/home_page.dart';
 import 'package:weather_application_2/features/presentation/pages/second_page.dart';
 import 'package:weather_application_2/features/presentation/pages/third_page.dart';
+import 'package:weather_application_2/features/presentation/theme/colors/colors.dart';
 
 void main() async { 
   BlocOverrides.runZoned( 
@@ -21,24 +23,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider( // регистрирую репозиторий
       create: (context) => WeatherRepo(),
-        child: BlocProvider<WeatherBloc>(
-          create: (context) => WeatherBloc(context.read<WeatherRepo>()), 
-            child: MaterialApp(
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.deepPurple,
-              ),
-              debugShowCheckedModeBanner: false, //снимаю Debug mode в правом верхнем углу экрана
-              home: const HomePage(),
-              
-              initialRoute: '/home', //именованные роуты для навигации между экранами
-              routes: {
-                '/home': (context) => const HomePage(),
-                '/second': (context) => const SecondPage(),
-                '/third': (context) => const ThirdPage(),
-              },
-            )
-        ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<WeatherBloc>(
+              create: (context) => WeatherBloc(context.read<WeatherRepo>()), 
+            ),
+            BlocProvider<WeatherDetailBloc>(
+              create: (context) => WeatherDetailBloc(context.read<WeatherRepo>()),
+            ),
+          ],
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: AppColor.primaryColor,
+            ),
+            debugShowCheckedModeBanner: false, //снимаю Debug mode в правом верхнем углу экрана
+            home: const HomePage(),
+            
+            initialRoute: '/home', //именованные роуты для навигации между экранами
+            routes: {
+              '/home': (context) => const HomePage(),
+              '/second': (context) => const SecondPage(),
+              '/third': (context) => const ThirdPage(),
+            },
+          ),
+        )
     );
   }
 }
