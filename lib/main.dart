@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider( // регистрирую репозиторий
+    return RepositoryProvider( //регистрирую репозиторий
       create: (context) => WeatherRepo(),
       child: MultiBlocProvider( //МультиПровайдерБлок, чтоб прокинуть два своих блока
         providers: [
