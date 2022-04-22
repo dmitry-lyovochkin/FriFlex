@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_application_2/features/data/models/weather_model.dart';
 
 abstract class WeatherState extends Equatable {
-  // final WeatherModel weatherModel; 
   const WeatherState();
   
   @override

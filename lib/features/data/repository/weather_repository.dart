@@ -10,7 +10,7 @@ class WeatherRepo implements WeatherRepository {
   @override
   Future<WeatherModel> fetchWeather(String cityName) async {
      final parameters = {
-      'appid': '254c9c65adc2f48f757587f78aae369f',
+      'appid': '254c9c65adc2f48f757587f78aae369f', // апиКей 
       'q': cityName, // название города
       'cnt': '24', // 24 - ограничение на получение данных. Из доки API
       'units': 'metric', // перевожу в нужный формат
